@@ -1,0 +1,13 @@
+apiVersion: myworkspot.in.myworkspot.in/v1alpha1
+kind: Test
+metadata:
+  name: test-sample
+spec:
+  # Add fields here
+  start: 5
+  end: 10
+  replicas: 5
+  deployment: 
+    - name: demo
+      namespace: default
+  
