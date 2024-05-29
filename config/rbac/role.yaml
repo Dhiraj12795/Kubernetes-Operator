@@ -1,33 +1,69 @@
----
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
-  creationTimestamp: null
   name: manager-role
+  namespace: system
 rules:
 - apiGroups:
-  - myworkspot.in.myworkspot.in
+  - ""
   resources:
-  - tests
+  - pods
+  - services
+  - endpoints
+  - persistentvolumeclaims
+  - events
+  - configmaps
+  - secrets
   verbs:
-  - create
-  - delete
-  - get
+  - "*"
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
   - list
-  - patch
-  - update
   - watch
 - apiGroups:
-  - myworkspot.in.myworkspot.in
+  - apps
   resources:
-  - tests/finalizers
+  - deployments
+  - daemonsets
+  - replicasets
+  - statefulsets
+  verbs:
+  - "*"
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  - cronjobs
+  verbs:
+  - "*"
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  verbs:
+  - "*"
+- apiGroups:
+  - ""
+  - apps
+  resources:
+  - pods/log
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - deployments/finalizers
   verbs:
   - update
 - apiGroups:
-  - myworkspot.in.myworkspot.in
+  - myworkspot.in
   resources:
+  - tests
   - tests/status
   verbs:
-  - get
-  - patch
-  - update
+  - "*"
